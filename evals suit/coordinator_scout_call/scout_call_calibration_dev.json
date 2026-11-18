@@ -1,0 +1,258 @@
+{
+ "summary": {
+  "split": "dev",
+  "cases": 22,
+  "labelled_yes": 11,
+  "labelled_no": 11,
+  "tpr": 1.0,
+  "tnr": 1.0,
+  "undecided": 0,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1",
+  "ran_at": 1794999666.5617704
+ },
+ "rows": [
+  {
+   "id": "real-dentist-near-me",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "dentist near me",
+   "trigger": "person_message",
+   "critique": "The person asks for a dentist 'near me'. Although the location is vague, the request is clearly for a place (a dentist). According to the rules, vague requests or those with missing details (like area/city) should be handed to the scout agent, as it is the scout's job to determine what is missing.",
+   "agree": true
+  },
+  {
+   "id": "real-answer-ayodhyanagar",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "AYODHYANAGAR",
+   "trigger": "person_answer",
+   "critique": "The person answered the coordinator's specific question about the area in Vijayawada with 'AYODHYANAGAR'. This provides the missing detail required for the scout agent to complete the search for pharmacies. According to the rules, an answer to a question about the search (specifically the area) must be handed back to the scout agent.",
+   "agree": true
+  },
+  {
+   "id": "real-answer-bangalore",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "bangalore",
+   "trigger": "person_answer",
+   "critique": "The person answered the scout agent's specific question about the city with 'bangalore'. This provides the missing detail required to complete the search for gyms near Nexus Mall in Koramangala. According to the rules, an answer to a question about the search (specifically the city) must be handed back to the scout agent to continue the process.",
+   "agree": true
+  },
+  {
+   "id": "real-hinglish-gyms",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "Koramangala Bangalore me achhe gyms batao",
+   "trigger": "person_message",
+   "critique": "The person's message 'Koramangala Bangalore me achhe gyms batao' is a request in Hindi/Hinglish asking for good gyms in Koramangala, Bangalore. This is a clear place search request with specific details (business type: gyms, area: Koramangala, city: Bangalore). According to the rules, any request to find a place, even if in another language, must be handed to the scout agent.",
+   "agree": true
+  },
+  {
+   "id": "real-typo-restarants",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "restarants in Indiranagar Bangalore",
+   "trigger": "person_message",
+   "critique": "The person asks for 'restarants' (misspelled restaurants) in a specific area and city. This is a clear request to find a place, even with the typo. The rules state that misspelt requests still go to the scout agent.",
+   "agree": true
+  },
+  {
+   "id": "real-shouting-pharmacy",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "I NEED A PHARMACY IN ADYAR CHENNAI NOW!!!",
+   "trigger": "person_message",
+   "critique": "The person explicitly asks for a pharmacy in a specific area (Adyar) and city (Chennai). Despite the urgency and capitalization, this is a clear request to find a place, which falls under the rule that the coordinator must hand the work to the scout agent.",
+   "agree": true
+  },
+  {
+   "id": "real-one-word-gyms",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "gyms",
+   "trigger": "person_message",
+   "critique": "The person's latest word is 'gyms', which is a request to find a specific type of place. Although the area and city are missing, the rules state that a request with details missing still goes to the scout agent, as it is the scout agent's job to determine what is missing. Therefore, the coordinator should call the scout agent.",
+   "agree": true
+  },
+  {
+   "id": "real-cardio-follow-up",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": true,
+   "latest": "which one has best in cardio",
+   "trigger": "person_message",
+   "critique": "The person is asking a follow-up question about the specific attributes of the gyms already found ('which one has best in cardio'). According to the rules, a follow-up that narrows or checks the places already found is still place discovery, so the scout agent should handle it to filter or rank the existing results based on cardio facilities.",
+   "agree": true
+  },
+  {
+   "id": "real-weather",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": false,
+   "latest": "what's the weather in Bangalore tomorrow?",
+   "trigger": "person_message",
+   "critique": "The person asks about the weather, which is not a request to find, locate, or recommend a place or business. According to the rules, questions about something else (like weather) are answered in one sentence without calling the scout agent.",
+   "agree": true
+  },
+  {
+   "id": "real-question-marks",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": false,
+   "latest": "???",
+   "trigger": "person_message",
+   "critique": "The person's latest message is '???', which is a non-sequitur or expression of confusion. It does not contain a request to find a place, nor does it provide an answer to a previous question from the scout agent (as there is no prior context of a search in progress). According to the rules, greetings, small talk, or unclear inputs that are not place searches result in a 'no'.",
+   "agree": true
+  },
+  {
+   "id": "real-dont-know",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": true,
+   "latest": "I don't know",
+   "trigger": "person_answer",
+   "critique": "The person answered the scout agent's request for area and city with 'I don't know'. According to the rules, when a person answers a question with 'I don't know' and gives nothing new to search with, the coordinator should not call the scout agent.",
+   "agree": true
+  },
+  {
+   "id": "w-hi",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": false,
+   "latest": "hi",
+   "trigger": "person_message",
+   "critique": "The person's latest message is a simple greeting ('hi'). It does not request, continue, or change a search for places. According to the rules, greetings are handled by the coordinator answering in one sentence without calling any tool.",
+   "agree": true
+  },
+  {
+   "id": "w-what-can-you-do",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": false,
+   "latest": "what can you do?",
+   "trigger": "person_message",
+   "critique": "The person asks 'what can you do?', which is a question about the assistant's capabilities, not a request to find a place. According to the rules, questions about the assistant itself are not place searches, so the coordinator should answer in one sentence and call no tool.",
+   "agree": true
+  },
+  {
+   "id": "w-thanks-after-results",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": false,
+   "latest": "thank you so much!",
+   "trigger": "person_message",
+   "critique": "The person's latest words are an expression of gratitude ('thank you so much!') following the receipt of search results. This is small talk or a reaction to results that does not request a new search, narrowing, or change in the place discovery process. According to the rules, the coordinator should answer in one sentence and call no tool.",
+   "agree": true
+  },
+  {
+   "id": "w-joke",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": false,
+   "latest": "tell me a joke",
+   "trigger": "person_message",
+   "critique": "The person asks for a joke, which is a request for content unrelated to finding places. According to the rules, when the person's words are not about finding places, the coordinator should answer in one sentence and call no tool.",
+   "agree": true
+  },
+  {
+   "id": "w-call-the-first-one",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": true,
+   "latest": "can you call the first one and ask if they are open on Sunday?",
+   "trigger": "person_message",
+   "critique": "The person asks the coordinator to call a specific gym and ask a question about its hours. This is a request for an action (making a phone call) or information retrieval that is not a search for places. The scout agent's role is to search for places, not to make calls or book appointments. Therefore, the coordinator should answer in one sentence and call no tool.",
+   "agree": true
+  },
+  {
+   "id": "w-stop-answer",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": false,
+   "latest": "stop",
+   "trigger": "person_answer",
+   "critique": "The person answered the coordinator's request for area and city with ' stop', which is a clear cancellation of the search. According to the rules, when a person cancels or gives up, the coordinator should not call the scout agent.",
+   "agree": true
+  },
+  {
+   "id": "w-maths",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": false,
+   "latest": "what is 15% of 2400?",
+   "trigger": "person_message",
+   "critique": "The person asks a math question ('what is 15% of 2400?'). This is not a request to find, locate, or recommend a place or business. According to the rules, questions about something else (like maths) are answered by the coordinator in one sentence without calling the scout agent.",
+   "agree": true
+  },
+  {
+   "id": "w-send-on-whatsapp",
+   "split": "dev",
+   "label": "no",
+   "judge": "no",
+   "borderline": false,
+   "latest": "can you send this list to my WhatsApp?",
+   "trigger": "person_message",
+   "critique": "The person asks the coordinator to send the previously found list of gyms to their WhatsApp. This is a request for a communication action (sending a message), not a request to find, locate, or narrow down places. The scout agent's function is to search for places, not to handle messaging or external communication. Therefore, the coordinator should answer in one sentence (likely explaining it cannot do that) and call no tool.",
+   "agree": true
+  },
+  {
+   "id": "w-radius-answer",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "5 km",
+   "trigger": "person_answer",
+   "critique": "The person answered the scout agent's specific question about the search radius with '5 km'. This provides the missing detail required to complete the gym search in Koramangala, Bangalore. According to the rules, an answer to a question about the search (such as distance) that continues the search requires the coordinator to call the scout agent again with the updated information.",
+   "agree": true
+  },
+  {
+   "id": "w-correction-answer",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "no wait, I meant Hyderabad not Bangalore",
+   "trigger": "person_answer",
+   "critique": "The person is correcting the city in their search request from Bangalore to Hyderabad. This is a continuation of the place search (pharmacies) with updated details. The scout agent needs this correction to perform the correct search, so the coordinator must call the scout agent again.",
+   "agree": true
+  },
+  {
+   "id": "w-hospitals-instead",
+   "split": "dev",
+   "label": "yes",
+   "judge": "yes",
+   "borderline": false,
+   "latest": "show me hospitals nearby instead",
+   "trigger": "person_message",
+   "critique": "The person asks to find hospitals in the same area as the previous search ('nearby' refers to Koramangala, Bangalore). This is a new request for a different type of place, which falls under the rule for new or changed requests in the same chat. The scout agent is required to perform this search.",
+   "agree": true
+  }
+ ]
+}

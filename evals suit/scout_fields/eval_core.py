@@ -10,7 +10,7 @@ run_session(session_id)  pull, keep the first call, evaluate, and save in the fi
 Files in this folder: scout_calls.json (the calls), eval_results.json (one result per call), session_runs.json (when each session was evaluated),
 labels.json (the person's labels, never written here). Nothing is cached: every run asks the models again.
 """
-import base64, json, re, threading, time, urllib.error, urllib.parse, urllib.request
+import base64, datetime, json, re, threading, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 from compare import compare
@@ -69,10 +69,10 @@ def _parse(value):
     return value
 
 
-def _paged(flt):
+def _paged(flt, fields='core,basic,io'):
     rows, cursor = [], None
     while True:
-        q = {'filter': json.dumps(flt), 'fromStartTime': '2026-10-01T00:00:00Z', 'toStartTime': '2027-12-31T00:00:00Z', 'limit': 100, 'fields': 'core,basic,io'}
+        q = {'filter': json.dumps(flt), 'fromStartTime': '2026-10-01T00:00:00Z', 'toStartTime': '2027-12-31T00:00:00Z', 'limit': 100, 'fields': fields}
         if cursor:
             q['cursor'] = cursor
         page = _observations(q)
@@ -101,6 +101,40 @@ def person_memory(messages):
         elif role == 'tool' and m.get('name') == 'ask_user' and not isinstance(content, dict):  # a dict is the tool's definition, not an answer
             lines.append(f'Person answered: {_text(content)}')
     return '\n'.join(lines)
+
+
+TURN_NAME = re.compile(r'^Turn (\d+) \((?:message|HITL answer)\): (.*)$')
+
+
+def list_sessions(environment='production'):
+    """The chat sessions the app wrote to Langfuse under one environment, newest first:
+    [{id, title, turns, updated (epoch seconds), project_id}].
+
+    Reads no message text, only names: every chat turn has a root observation named "Turn 3 (HITL answer): <what the person typed>" (it has no
+    session id itself) and a "Coordinator" observation in the same trace that carries the session id. The title is the text of the session's first turn."""
+    env = {'type': 'string', 'column': 'environment', 'operator': '=', 'value': environment}
+    runs = _paged([env, {'type': 'string', 'column': 'name', 'operator': '=', 'value': 'Coordinator'}], fields='core,basic')
+    roots = _paged([env, {'type': 'string', 'column': 'name', 'operator': 'starts with', 'value': 'Turn '}], fields='core,basic')
+    first_typed = {}  # trace id -> what the person typed, for the traces that are a chat's first turn
+    for o in roots:
+        m = TURN_NAME.match(o.get('name') or '')
+        if m and m.group(1) == '1':
+            first_typed[o['traceId']] = m.group(2)
+    sessions = {}
+    for o in runs:
+        sid = o.get('sessionId')
+        if not sid:
+            continue
+        s = sessions.setdefault(sid, {'id': sid, 'title': 'Session ' + sid[:8], 'turns': 0, 'updated': 0.0, 'project_id': o.get('projectId')})
+        s['turns'] += 1
+        s['updated'] = max(s['updated'], _epoch(o['startTime']))
+        if o['traceId'] in first_typed:
+            s['title'] = first_typed[o['traceId']]
+    return sorted(sessions.values(), key=lambda s: s['updated'], reverse=True)
+
+
+def _epoch(iso):
+    return datetime.datetime.fromisoformat(iso.replace('Z', '+00:00')).timestamp()
 
 
 def _memories(session_id=None):

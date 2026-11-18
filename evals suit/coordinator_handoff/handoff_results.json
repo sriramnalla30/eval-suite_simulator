@@ -166,5 +166,65 @@
   "critique": "The person provided the city 'vijayawada' and the area 'AYODHYANAGAR' in their answers to the coordinator's questions. The REQUEST is 'Best pharmacies near me', which contains neither the city nor the area. Both facts are dropped, leaving the scout agent without the necessary location details.",
   "judge_model": "qwen/qwen3.8-27b",
   "prompt": "v1"
+ },
+ {
+  "call_id": "634c64a793ec2546:0",
+  "session_id": "427742b37e884a4e980855e971ce2f74",
+  "time": "2026-11-18T08:38:31.508Z",
+  "request": "dentist near me",
+  "memory": "Person: dentist near me",
+  "verdict": "pass",
+  "failure_type": "none",
+  "critique": "The person's only input is 'dentist near me'. The REQUEST is 'dentist near me'. The business type (dentist) and the location indicator (near me) are preserved exactly. No facts were dropped, altered, or invented.",
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ {
+  "call_id": "04fee1fafa85b3fe:0",
+  "session_id": "427742b37e884a4e980855e971ce2f74",
+  "time": "2026-11-18T08:38:48.110Z",
+  "request": "dentist near me in Satyanarayanapuram, Vijayawada",
+  "memory": "Person: dentist near me\nCoordinator called scout_agent(request=\"dentist near me\")\nscout_agent returned: needs_input, missing area and city\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city where you need a dentist.\"\nPerson answered: satyanarayanapuram vijayawada",
+  "verdict": "pass",
+  "failure_type": "none",
+  "critique": "The person initially asked for a 'dentist near me'. The scout agent requested area and city. The person answered 'satyanarayanapuram vijayawada'. The REQUEST is 'dentist near me in Satyanarayanapuram, Vijayawada'. It includes the business type ('dentist'), the area ('Satyanarayanapuram'), and the city ('Vijayawada'). The phrase 'near me' is retained from the original request, which is acceptable as it reflects the user's initial intent and does not contradict the specific location provided. No facts are dropped, altered, or invented.",
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ {
+  "call_id": "1f34c7109adc3566:0",
+  "session_id": "3079c532ba8149b184da025b4f60af19",
+  "time": "2026-11-18T09:42:52.066Z",
+  "request": "find physiotherapist near me",
+  "memory": "Person: find physiotherapist near me",
+  "verdict": "pass",
+  "failure_type": "none",
+  "critique": "The person's only input is 'find physiotherapist near me'. The REQUEST is identical to this input. The business type (physiotherapist) and the location indicator (near me) are preserved exactly. No facts were dropped, altered, or invented.",
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ {
+  "call_id": "b8a91472974d0029:0",
+  "session_id": "3079c532ba8149b184da025b4f60af19",
+  "time": "2026-11-18T09:43:27.624Z",
+  "request": "find physiotherapist near me Satynarayanapuram, Vijayawada",
+  "memory": "Person: find physiotherapist near me\nCoordinator called scout_agent(request=\"find physiotherapist near me\")\nscout_agent returned: needs_input, missing area and city\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".\"\nPerson answered: Satynarayanapuram, Vijayawada",
+  "verdict": "pass",
+  "failure_type": "none",
+  "critique": "The person initially asked for a 'physiotherapist near me'. When asked for location details, the person provided 'Satynarayanapuram, Vijayawada'. The REQUEST contains 'find physiotherapist near me Satynarayanapuram, Vijayawada'. It includes the business type ('physiotherapist'), the area ('Satynarayanapuram'), and the city ('Vijayawada'). The spelling matches the user's input exactly. No facts were dropped, altered, or invented.",
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ {
+  "call_id": "620a833dd0750bdc:0",
+  "session_id": "3079c532ba8149b184da025b4f60af19",
+  "time": "2026-11-18T09:45:21.502Z",
+  "request": "find physiotherapist near me Satynarayana puram, Vijayawada",
+  "memory": "Person: find physiotherapist near me\nCoordinator called scout_agent(request=\"find physiotherapist near me\")\nscout_agent returned: needs_input, missing area and city\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".\"\nPerson answered: Satynarayanapuram, Vijayawada\nCoordinator called scout_agent(request=\"find physiotherapist near me Satynarayanapuram, Vijayawada\")\nscout_agent returned: needs_input, missing area\nCoordinator asked the person: \"Could you provide a different spelling of the area or a nearby landmark?\"\nPerson answered: Satynarayana puram, Vijayawada",
+  "verdict": "pass",
+  "failure_type": "none",
+  "critique": "The person initially asked for a 'physiotherapist near me'. When asked for location, they provided 'Satynarayanapuram, Vijayawada'. The scout agent flagged the area as missing/unclear. The coordinator asked for a different spelling or landmark. The person answered 'Satynarayana puram, Vijayawada'. The REQUEST is 'find physiotherapist near me Satynarayana puram, Vijayawada'. This request includes the business type ('physiotherapist'), the corrected area spelling ('Satynarayana puram'), and the city ('Vijayawada'). It correctly uses the latest value provided by the user for the area, replacing the previous attempt. No facts are dropped, altered, or invented.",
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
  }
 ]

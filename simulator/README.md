@@ -21,6 +21,8 @@ cd ..\simulator ; .\start.ps1                                                   
 
 `APP_URL` points the simulator at another app instance (default `http://127.0.0.1:8000`). `SIM_PORT` changes the simulator's port.
 
+The app answers only signed-in accounts, so the simulator signs in as `APP_EMAIL` / `APP_PASSWORD`. `start.ps1` fills them from the first account in `SEED_USERS` of the app's `.env` when they are not set.
+
 ## What is checked
 
 For each run the simulator reads the app's event stream and checks: the scout agent's decisions in order (`ready`, or `needs_input` then `ready`), how many questions the coordinator asked, which details the first question was about, that the final result has a map pin (lat and lng), and that business, area and city are what the fake user said. A case passes only if every check holds. A model error (for example a rate limit) shows as **Errored**, not Failed.

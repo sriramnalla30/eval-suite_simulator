@@ -404,5 +404,152 @@
    "unhelpful": 0.874,
    "no_results": 0.039
   }
+ },
+ {
+  "item_id": "427742b37e884a4e980855e971ce2f74:1",
+  "session_id": "427742b37e884a4e980855e971ce2f74",
+  "time": "2026-11-18T08:38:32.975Z",
+  "channel": "ask",
+  "message": "Please tell me the area (neighbourhood) and city where you need a dentist.",
+  "memory": "Person: dentist near me\nCoordinator asked the scout agent: \"dentist near me\"\nScout agent reported: status needs_input; business dentists; missing area and city; it wants the person asked \"Please tell me the area (neighbourhood) and city where you need a dentist.\"",
+  "outcome": null,
+  "verdict": "pass",
+  "failures": [],
+  "notes": [],
+  "scores": {
+   "off_topic": 0.012,
+   "asks_known": 0.01,
+   "unhelpful": 0.01
+  }
+ },
+ {
+  "item_id": "427742b37e884a4e980855e971ce2f74:2",
+  "session_id": "427742b37e884a4e980855e971ce2f74",
+  "time": "2026-11-18T08:39:35.500Z",
+  "channel": "ask",
+  "message": "Could you provide a different spelling or a nearby landmark for the area?",
+  "memory": "Person: dentist near me\nCoordinator asked the scout agent: \"dentist near me\"\nScout agent reported: status needs_input; business dentists; missing area and city; it wants the person asked \"Please tell me the area (neighbourhood) and city where you need a dentist.\"\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city where you need a dentist.\"\nPerson answered: satyanarayanapuram vijayawada\nCoordinator asked the scout agent: \"dentist near me in Satyanarayanapuram, Vijayawada\"\nScout agent reported: status needs_input; business dentists; city Vijayawada; missing area; it wants the person asked \"Could you provide a different spelling or a nearby landmark for the area?\"",
+  "outcome": null,
+  "verdict": "pass",
+  "failures": [],
+  "notes": [],
+  "scores": {
+   "off_topic": 0.11,
+   "asks_known": 0.052,
+   "unhelpful": 0.014
+  }
+ },
+ {
+  "item_id": "427742b37e884a4e980855e971ce2f74:3",
+  "session_id": "427742b37e884a4e980855e971ce2f74",
+  "time": "2026-11-18T08:42:03.013Z",
+  "channel": "ask",
+  "message": "Please provide the specific neighbourhood or area within Vijayawada where you need the dentist.",
+  "memory": "Person: dentist near me\nCoordinator asked the scout agent: \"dentist near me\"\nScout agent reported: status needs_input; business dentists; missing area and city; it wants the person asked \"Please tell me the area (neighbourhood) and city where you need a dentist.\"\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city where you need a dentist.\"\nPerson answered: satyanarayanapuram vijayawada\nCoordinator asked the scout agent: \"dentist near me in Satyanarayanapuram, Vijayawada\"\nScout agent reported: status needs_input; business dentists; city Vijayawada; missing area; it wants the person asked \"Could you provide a different spelling or a nearby landmark for the area?\"\nCoordinator asked the person: \"Could you provide a different spelling or a nearby landmark for the area?\"\nPerson answered: Vijayawada",
+  "outcome": null,
+  "verdict": "review",
+  "failures": [],
+  "notes": [
+   "The Decisions API was not sure (confidence under 70%) on: asks_known."
+  ],
+  "scores": {
+   "off_topic": 0.114,
+   "asks_known": 0.478,
+   "unhelpful": 0.07
+  }
+ },
+ {
+  "item_id": "427742b37e884a4e980855e971ce2f74:4",
+  "session_id": "427742b37e884a4e980855e971ce2f74",
+  "time": "2026-11-18T08:42:16.921Z",
+  "channel": "ask",
+  "message": "Please confirm the neighbourhood spelling, e.g., Satyanarayana Puram, within Vijayawada.",
+  "memory": "Person: dentist near me\nCoordinator asked the scout agent: \"dentist near me\"\nScout agent reported: status needs_input; business dentists; missing area and city; it wants the person asked \"Please tell me the area (neighbourhood) and city where you need a dentist.\"\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city where you need a dentist.\"\nPerson answered: satyanarayanapuram vijayawada\nCoordinator asked the scout agent: \"dentist near me in Satyanarayanapuram, Vijayawada\"\nScout agent reported: status needs_input; business dentists; city Vijayawada; missing area; it wants the person asked \"Could you provide a different spelling or a nearby landmark for the area?\"\nCoordinator asked the person: \"Could you provide a different spelling or a nearby landmark for the area?\"\nPerson answered: Vijayawada\nCoordinator asked the person: \"Please provide the specific neighbourhood or area within Vijayawada where you need the dentist.\"\nPerson answered: satyanarayanapuram",
+  "outcome": null,
+  "verdict": "review",
+  "failures": [],
+  "notes": [
+   "The Decisions API was not sure (confidence under 70%) on: asks_known."
+  ],
+  "scores": {
+   "off_topic": 0.048,
+   "asks_known": 0.459,
+   "unhelpful": 0.089
+  }
+ },
+ {
+  "item_id": "427742b37e884a4e980855e971ce2f74:5",
+  "session_id": "427742b37e884a4e980855e971ce2f74",
+  "time": "2026-11-18T08:42:35.599Z",
+  "channel": "reply",
+  "message": "I still need the exact neighbourhood (area) name you want the dentist in; please provide it so I can complete the search.",
+  "memory": "Person: dentist near me\nCoordinator asked the scout agent: \"dentist near me\"\nScout agent reported: status needs_input; business dentists; missing area and city; it wants the person asked \"Please tell me the area (neighbourhood) and city where you need a dentist.\"\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city where you need a dentist.\"\nPerson answered: satyanarayanapuram vijayawada\nCoordinator asked the scout agent: \"dentist near me in Satyanarayanapuram, Vijayawada\"\nScout agent reported: status needs_input; business dentists; city Vijayawada; missing area; it wants the person asked \"Could you provide a different spelling or a nearby landmark for the area?\"\nCoordinator asked the person: \"Could you provide a different spelling or a nearby landmark for the area?\"\nPerson answered: Vijayawada\nCoordinator asked the person: \"Please provide the specific neighbourhood or area within Vijayawada where you need the dentist.\"\nPerson answered: satyanarayanapuram\nCoordinator asked the person: \"Please confirm the neighbourhood spelling, e.g., Satyanarayana Puram, within Vijayawada.\"\nPerson answered: Satyanarayana Puram, within Vijayawada.",
+  "outcome": null,
+  "verdict": "fail",
+  "failures": [
+   "unhelpful"
+  ],
+  "notes": [
+   "The message does not help the person with what they asked."
+  ],
+  "scores": {
+   "off_topic": 0.57,
+   "asks_known": 0.569,
+   "unhelpful": 0.71
+  }
+ },
+ {
+  "item_id": "3079c532ba8149b184da025b4f60af19:1",
+  "session_id": "3079c532ba8149b184da025b4f60af19",
+  "time": "2026-11-18T09:42:53.712Z",
+  "channel": "ask",
+  "message": "Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".",
+  "memory": "Person: find physiotherapist near me\nCoordinator asked the scout agent: \"find physiotherapist near me\"\nScout agent reported: status needs_input; business physiotherapists; missing area and city; it wants the person asked \"Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".\"",
+  "outcome": null,
+  "verdict": "pass",
+  "failures": [],
+  "notes": [],
+  "scores": {
+   "off_topic": 0.028,
+   "asks_known": 0.039,
+   "unhelpful": 0.01
+  }
+ },
+ {
+  "item_id": "3079c532ba8149b184da025b4f60af19:2",
+  "session_id": "3079c532ba8149b184da025b4f60af19",
+  "time": "2026-11-18T09:44:14.958Z",
+  "channel": "ask",
+  "message": "Could you provide a different spelling of the area or a nearby landmark?",
+  "memory": "Person: find physiotherapist near me\nCoordinator asked the scout agent: \"find physiotherapist near me\"\nScout agent reported: status needs_input; business physiotherapists; missing area and city; it wants the person asked \"Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".\"\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".\"\nPerson answered: Satynarayanapuram, Vijayawada\nCoordinator asked the scout agent: \"find physiotherapist near me Satynarayanapuram, Vijayawada\"\nScout agent reported: status needs_input; business physiotherapists; city Vijayawada; missing area; it wants the person asked \"Could you provide a different spelling of the area or a nearby landmark?\"",
+  "outcome": null,
+  "verdict": "pass",
+  "failures": [],
+  "notes": [],
+  "scores": {
+   "off_topic": 0.072,
+   "asks_known": 0.046,
+   "unhelpful": 0.022
+  }
+ },
+ {
+  "item_id": "3079c532ba8149b184da025b4f60af19:3",
+  "session_id": "3079c532ba8149b184da025b4f60af19",
+  "time": "2026-11-18T09:45:58.785Z",
+  "channel": "reply",
+  "message": "I found 20 physiotherapists in Satynarayana puram, Vijayawada; the top one is Hasini Physiotherapy & Pain Relief Center with a 5.0 rating from 562 reviews.",
+  "memory": "Person: find physiotherapist near me\nCoordinator asked the scout agent: \"find physiotherapist near me\"\nScout agent reported: status needs_input; business physiotherapists; missing area and city; it wants the person asked \"Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".\"\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".\"\nPerson answered: Satynarayanapuram, Vijayawada\nCoordinator asked the scout agent: \"find physiotherapist near me Satynarayanapuram, Vijayawada\"\nScout agent reported: status needs_input; business physiotherapists; city Vijayawada; missing area; it wants the person asked \"Could you provide a different spelling of the area or a nearby landmark?\"\nCoordinator asked the person: \"Could you provide a different spelling of the area or a nearby landmark?\"\nPerson answered: Satynarayana puram, Vijayawada\nCoordinator asked the scout agent: \"find physiotherapist near me Satynarayana puram, Vijayawada\"\nScout agent reported: status ready; business physiotherapists; area Satynarayana puram; city Vijayawada; search found 20 places; best overall Hasini physiotherapy & Pain Relief Center (5.0 stars, 562 reviews)",
+  "outcome": "results",
+  "verdict": "review",
+  "failures": [],
+  "notes": [
+   "The Decisions API was not sure (confidence under 70%) on: asks_known."
+  ],
+  "scores": {
+   "off_topic": 0.01,
+   "asks_known": 0.325,
+   "unhelpful": 0.021,
+   "no_results": 0.01
+  }
  }
 ]

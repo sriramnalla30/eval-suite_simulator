@@ -2264,5 +2264,51 @@
   "memory": "Person: Best pharmacies near me\nCoordinator asked the person: \"Please tell me the area (neighbourhood) and city you are looking for, e.g., 'Koramangala Bangalore'.\"\nPerson answered: vijayawada\nCoordinator asked the person: \"Please also provide the specific area or neighbourhood within Vijayawada you are interested in.\"\nPerson answered: AYODHYANAGAR",
   "report": null,
   "raw_output": null
+ },
+ {
+  "observation_id": "6b096b92c8711a95",
+  "session_id": "427742b37e884a4e980855e971ce2f74",
+  "time": "2026-11-18T08:38:31.996Z",
+  "level": "DEFAULT",
+  "status_message": "",
+  "request": "dentist near me",
+  "memory": "Person: dentist near me",
+  "report": {
+   "status": "needs_input",
+   "business_type": "dentists",
+   "area": null,
+   "city": null,
+   "missing": [
+    "area",
+    "city"
+   ],
+   "question": "Please tell me the area (neighbourhood) and city where you need a dentist.",
+   "args": null,
+   "problem": null
+  },
+  "raw_output": null
+ },
+ {
+  "observation_id": "38cce17d8a5382dc",
+  "session_id": "3079c532ba8149b184da025b4f60af19",
+  "time": "2026-11-18T09:42:52.564Z",
+  "level": "DEFAULT",
+  "status_message": "",
+  "request": "find physiotherapist near me",
+  "memory": "Person: find physiotherapist near me",
+  "report": {
+   "status": "needs_input",
+   "business_type": "physiotherapists",
+   "area": null,
+   "city": null,
+   "missing": [
+    "area",
+    "city"
+   ],
+   "question": "Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".",
+   "args": null,
+   "problem": null
+  },
+  "raw_output": null
  }
 ]

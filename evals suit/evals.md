@@ -23,3 +23,13 @@ how : for every scout agent call, the judge model gets the coordinator memory an
 fail types : dropped, altered, invented, stale
 seen in : 73ce5afea47448deab044b26513c49f5, edge-25, edge-14
 shown on : simulator Evals page, column "Hand-off arguments"
+## 4. Coordinator: not calling the scout agent
+problem : when the request is about finding places (scouting) the coordinator must call the scout agent. After the user gave the business type, area and city, it did not call the scout agent again: it asked the user again, then only replied with text ("I still need the exact neighbourhood (area) name...")
+not covered by the other evals : eval 3 only judges the scout agent calls that were made, so a call that was never made is not seen (in this session both calls it made were fine, so eval 3 passes it)
+when : every coordinator model call of a session (Langfuse "Coordinator: model call"), not only the ones that called the scout agent
+how : 1) code reads what the coordinator was reacting to from that call's input: the person's message, the person's answer to a question, or the scout agent's report. 2) the person's words go to a judge model (prompt scout-call-judge, in Langfuse): should the scout agent be called now? yes = the words ask for, continue or change a search for places (a missing area or city, one word, typos, Hinglish, a question about the places already found all still count), no = greeting, thanks, another topic, cancel, "I don't know". After a scout agent report no new call is expected (a rule, no model). 3) the Langfuse trace of the same model call says whether it called scout_agent. should call + called = pass, should call + not called = fail, should not + called = fail, should not + not called = pass. a session passes only if every model call passes
+fail types : not_called (asked or replied instead of calling), called_wrongly (a scout search for a message that is not a place search, or a second search where it had to relay the report)
+calibrate : scout_call_calibrate.py runs the judge on 58 labelled cases (8 are the examples in the prompt and are not scored, 22 dev, 28 test): TPR and TNR 100% on dev and on test. The labels are mine, from prompts/coordinator.md; the cases marked borderline are judgement calls
+seen in : 427742b37e884a4e980855e971ce2f74 (model calls 5, 6 and 7 fail: the person answered and the coordinator did not call the scout agent)
+shown on : simulator Evals page, column "Scout agent called" (EVAL 4)
+session id : 427742b37e884a4e980855e971ce2f74

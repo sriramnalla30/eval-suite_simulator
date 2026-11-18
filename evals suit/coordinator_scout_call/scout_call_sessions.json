@@ -1,0 +1,90 @@
+{
+ "427742b37e884a4e980855e971ce2f74": {
+  "verdict": "fail",
+  "calls": 7,
+  "failed_calls": 3,
+  "ran_at": 1795000195.5737252,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "014e1d60e4e04735a026b12307ec8c79": {
+  "verdict": "pass",
+  "calls": 4,
+  "failed_calls": 0,
+  "ran_at": 1795000297.862027,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "138162e1177647caa71a448a85038c1a": {
+  "verdict": "pass",
+  "calls": 2,
+  "failed_calls": 0,
+  "ran_at": 1795000300.6473327,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "1c3daceedfad423eb0753fcc4fee3771": {
+  "verdict": "pass",
+  "calls": 1,
+  "failed_calls": 0,
+  "ran_at": 1795000302.6581516,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "1ce7e07e908e462cbf6216621d2f19d0": {
+  "verdict": "pass",
+  "calls": 2,
+  "failed_calls": 0,
+  "ran_at": 1795000329.2332814,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "2121c24b78df44599b1b245afb71bf2a": {
+  "verdict": "pass",
+  "calls": 2,
+  "failed_calls": 0,
+  "ran_at": 1795000334.429105,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "2a12e681290d4d18a9def34cbeffd51d": {
+  "verdict": "pass",
+  "calls": 4,
+  "failed_calls": 0,
+  "ran_at": 1795000369.4955206,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "3079c532ba8149b184da025b4f60af19": {
+  "verdict": "pass",
+  "calls": 6,
+  "failed_calls": 0,
+  "ran_at": 1795000415.0333412,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "33bb82ae402d40ddaf51a2a3a40e19bf": {
+  "verdict": "pass",
+  "calls": 2,
+  "failed_calls": 0,
+  "ran_at": 1795000441.5422573,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "3468e947c93749f4bdd6e67a9480ab59": {
+  "verdict": "pass",
+  "calls": 4,
+  "failed_calls": 0,
+  "ran_at": 1795000476.7898498,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ },
+ "3e2a6c9f6e9644829db379f2c2eb25fa": {
+  "verdict": "pass",
+  "calls": 2,
+  "failed_calls": 0,
+  "ran_at": 1795000478.8652444,
+  "judge_model": "qwen/qwen3.8-27b",
+  "prompt": "v1"
+ }
+}

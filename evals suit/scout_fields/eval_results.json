@@ -91,5 +91,87 @@
   ],
   "fields": {},
   "matched_by": {}
+ },
+ {
+  "observation_id": "6b096b92c8711a95",
+  "session_id": "427742b37e884a4e980855e971ce2f74",
+  "time": "2026-11-18T08:38:31.996Z",
+  "request": "dentist near me",
+  "memory": "Person: dentist near me",
+  "report": {
+   "status": "needs_input",
+   "business_type": "dentists",
+   "area": null,
+   "city": null,
+   "missing": [
+    "area",
+    "city"
+   ],
+   "question": "Please tell me the area (neighbourhood) and city where you need a dentist.",
+   "args": null,
+   "problem": null
+  },
+  "reference": {
+   "business_type": "dentists",
+   "area": null,
+   "city": null,
+   "missing": [
+    "area",
+    "city"
+   ]
+  },
+  "reference_reasoning": "The person asked for a 'dentist', which corresponds to the business type 'dentists'. The phrase 'near me' is explicitly defined as not being an area. No city or specific neighbourhood was mentioned in the conversation.",
+  "verdict": "pass",
+  "failures": [],
+  "notes": [],
+  "fields": {
+   "business_type": "ok",
+   "area": "ok",
+   "city": "ok"
+  },
+  "matched_by": {
+   "business_type": "same text"
+  }
+ },
+ {
+  "observation_id": "38cce17d8a5382dc",
+  "session_id": "3079c532ba8149b184da025b4f60af19",
+  "time": "2026-11-18T09:42:52.564Z",
+  "request": "find physiotherapist near me",
+  "memory": "Person: find physiotherapist near me",
+  "report": {
+   "status": "needs_input",
+   "business_type": "physiotherapists",
+   "area": null,
+   "city": null,
+   "missing": [
+    "area",
+    "city"
+   ],
+   "question": "Please tell me the area (neighbourhood) and city you are looking for, e.g., \"physiotherapists in Indiranagar Bangalore\".",
+   "args": null,
+   "problem": null
+  },
+  "reference": {
+   "business_type": "physiotherapists",
+   "area": null,
+   "city": null,
+   "missing": [
+    "area",
+    "city"
+   ]
+  },
+  "reference_reasoning": "The person asked for 'physiotherapist'. This is a business type, converted to the plural lowercase form 'physiotherapists'. The phrase 'near me' is explicitly excluded from being an area. No city or specific neighbourhood was mentioned.",
+  "verdict": "pass",
+  "failures": [],
+  "notes": [],
+  "fields": {
+   "business_type": "ok",
+   "area": "ok",
+   "city": "ok"
+  },
+  "matched_by": {
+   "business_type": "same text"
+  }
  }
 ]

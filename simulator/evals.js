@@ -4,9 +4,13 @@ const el = (tag, text, cls) => { const e = document.createElement(tag); if (text
 const FILTERS = [['all', 'All'], ['not_run', 'Not run'], ['pass', 'Passed'], ['fail', 'Failed'], ['review', 'Needs review'], ['no_calls', 'No scout call']];
 const LABEL = { pass: 'Pass', fail: 'Fail', review: 'Review', unknown: 'Not fully checked', no_calls: 'No scout call' };
 const TONE = { pass: 'pass', fail: 'fail', review: 'error', unknown: '' };
-let evals = [], rows = [], runNo = {}, focus = 'all', filter = 'all', query = '', timer = null, openCell = null, lastFocus = null;
+const SOURCES = [['all', 'All sessions'], ['production', 'Production'], ['local', 'Test runs and local chats']];
+let evals = [], rows = [], runNo = {}, focus = 'all', filter = 'all', source = 'all', prod = {}, query = '', timer = null, openCell = null, lastFocus = null;
 
+// `t` is in seconds; a session's own time (r.updated) is in milliseconds
 const when = t => { const d = new Date(t * 1000); return isNaN(d) ? '-' : d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' }) + ', ' + d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' }); };
+const inSource = r => source === 'all' || (source === 'production') === (r.source === 'production');
+const shown = () => rows.filter(inSource);
 const calls = (n, unit = 'scout call') => n + ' ' + unit + (n === 1 ? '' : 's');
 // what a cell counts as, for the filters and the counts: not_run, busy, or the verdict
 const keyOf = c => c.state === 'done' ? c.verdict : c.state === 'not_run' ? 'not_run' : 'busy';
@@ -23,12 +27,12 @@ function matches(r) {
 const found = r => { const q = query.trim().toLowerCase(); return !q || r.id.toLowerCase().includes(q) || r.title.toLowerCase().includes(q); };
 
 function counts(id) {
-  const n = {}; rows.forEach(r => { const k = keyOf(r.cells[id]); n[k] = (n[k] || 0) + 1; }); return n;
+  const n = {}; shown().forEach(r => { const k = keyOf(r.cells[id]); n[k] = (n[k] || 0) + 1; }); return n;
 }
 function cards() {
   const box = $('#evcards'); box.replaceChildren();
   const all = el('button', undefined, 'evcard' + (focus === 'all' ? ' on' : '')); all.type = 'button'; all.setAttribute('aria-pressed', String(focus === 'all'));
-  all.append(el('span', 'ALL', 'tag'), el('h3', 'All evals'), el('p', rows.length + ' sessions · ' + evals.length + ' evals', 'sub'));
+  all.append(el('span', 'ALL', 'tag'), el('h3', 'All evals'), el('p', shown().length + ' sessions · ' + evals.length + ' evals', 'sub'));
   all.addEventListener('click', () => { focus = 'all'; draw(); }); box.append(all);
   evals.forEach(e => {
     const n = counts(e.id), card = el('div', undefined, 'evcard' + (focus === e.id ? ' on' : ''));
@@ -40,7 +44,7 @@ function cards() {
       const s = el('span', undefined, 'evnum ' + cls); s.append(el('b', String(v)), document.createTextNode(' ' + name)); line.append(s);
     });
     card.append(pick, line);
-    const todo = rows.filter(r => r.cells[e.id].state === 'not_run').map(r => r.id);
+    const todo = shown().filter(r => r.cells[e.id].state === 'not_run').map(r => r.id);
     if (todo.length) {
       const b = el('button', 'Run ' + todo.length + ' not run', 'linkbtn'); b.type = 'button';
       b.addEventListener('click', () => { if (confirm('Run "' + e.title + '" on ' + todo.length + ' sessions? Each one calls the judge model.')) run(e.id, todo); });
@@ -55,6 +59,21 @@ function filters() {
     const b = el('button', text, k === filter ? 'on' : ''); b.type = 'button'; b.setAttribute('aria-pressed', String(k === filter));
     b.addEventListener('click', () => { filter = k; filters(); draw(); }); box.append(b);
   });
+}
+function sources() {
+  const box = $('#sources'); box.replaceChildren();
+  SOURCES.forEach(([k, text]) => {
+    const b = el('button', text, k === source ? 'on' : ''); b.type = 'button'; b.setAttribute('aria-pressed', String(k === source));
+    b.addEventListener('click', () => { source = k; sources(); draw(); }); box.append(b);
+  });
+}
+// One line about where the production sessions come from: Langfuse, environment "production"
+function prodNote() {
+  const note = $('#prodnote'); note.replaceChildren();
+  if (prod.loading) { note.append(document.createTextNode('Reading the production sessions from Langfuse…')); return; }
+  note.append(document.createTextNode(prod.error ? 'Could not read the production sessions from Langfuse (' + prod.error + '). ' : prod.count + ' production session' + (prod.count === 1 ? '' : 's') + ' from Langfuse (environment “' + prod.environment + '”). '));
+  const b = el('button', 'Refresh', 'linkbtn'); b.type = 'button'; b.addEventListener('click', () => load(true)); note.append(b);
+  note.classList.toggle('bad', !!prod.error);
 }
 async function run(evalId, ids) {
   const r = await fetch('/api/eval/' + evalId + '/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ session_ids: ids }) });
@@ -90,16 +109,20 @@ function chip(r, e) {
   return td;
 }
 function draw() {
-  cards(); head();
-  const list = rows.filter(r => found(r) && matches(r)), body = $('#rows'); body.replaceChildren();
+  cards(); head(); prodNote();
+  const list = shown().filter(r => found(r) && matches(r)), body = $('#rows'); body.replaceChildren();
   list.forEach(r => {
-    const tr = el('tr'), s = el('td', undefined, 'stick');
-    s.append(el('span', r.title, 'ct'));
-    const meta = el('span', undefined, 'cid'); meta.append(document.createTextNode((runNo[r.id] ? 'Run ' + runNo[r.id] + ' · ' : '') + r.id + ' · ' + when(r.updated) + ' · '));
-    const a = el('a', 'Open'); a.href = '/timeline/' + r.id; a.target = '_blank'; a.rel = 'noopener'; meta.append(a); s.append(meta);
+    const tr = el('tr'), s = el('td', undefined, 'stick'), prodRow = r.source === 'production';
+    const title = el('span', undefined, 'ct'); title.append(document.createTextNode(r.title));
+    if (prodRow) title.append(el('span', 'PRODUCTION', 'tag srcbadge'));
+    s.append(title);
+    const meta = el('span', undefined, 'cid');
+    meta.append(document.createTextNode((runNo[r.id] ? 'Run ' + runNo[r.id] + ' · ' : '') + r.id + ' · ' + when(r.updated / 1000) + (prodRow ? ' · ' + calls(r.turns, 'turn') : '') + ' · '));
+    // a production chat is not stored here: its page is the session in Langfuse
+    const a = el('a', prodRow ? 'Open in Langfuse ↗' : 'Open'); a.href = prodRow ? r.url : '/timeline/' + r.id; a.target = '_blank'; a.rel = 'noopener'; meta.append(a); s.append(meta);
     tr.append(s); evals.forEach(e => tr.append(chip(r, e))); body.append(tr);
   });
-  $('#count').textContent = list.length + ' of ' + rows.length + ' sessions';
+  $('#count').textContent = list.length + ' of ' + shown().length + ' sessions';
   const empty = $('#empty'); empty.hidden = list.length > 0; empty.textContent = 'No session matches.';
   if (openCell) renderDrawer();
 }
@@ -150,13 +173,13 @@ async function runNumbers() {
   try { runs = runs.concat(await (await fetch('/api/app-runs')).json()).sort((x, y) => new Date(y.at) - new Date(x.at)); } catch (e) { /* the app is offline: test runs only */ }
   runNo = {}; runs.forEach((r, i) => { if (r.chat_id) runNo[r.chat_id] = runs.length - i; });
 }
-async function load() {
-  const [d] = await Promise.all([fetch('/api/eval/sessions').then(r => r.json()), runNumbers()]);
-  evals = d.evals; rows = d.rows; draw();
-  // while anything is waiting or running, look again every few seconds
+async function load(refresh = false) {
+  const [d] = await Promise.all([fetch('/api/eval/sessions' + (refresh === true ? '?refresh=1' : '')).then(r => r.json()), runNumbers()]);
+  evals = d.evals; rows = d.rows; prod = d.production || {}; draw();
+  // while anything is waiting or running (or the production list is still being read), look again every few seconds
   clearTimeout(timer);
-  if (rows.some(r => evals.some(e => ['queued', 'running'].includes(r.cells[e.id].state)))) timer = setTimeout(load, 3000);
+  if (prod.loading || rows.some(r => evals.some(e => ['queued', 'running'].includes(r.cells[e.id].state)))) timer = setTimeout(load, prod.loading ? 1500 : 3000);
 }
 $('#search').addEventListener('input', e => { query = e.target.value; draw(); });
-filters(); load();
+sources(); filters(); load();
 })();

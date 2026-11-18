@@ -17,13 +17,15 @@
   <header class="intro">
     <div class="eyebrow">SESSIONS × EVALS</div>
     <h1>Evals</h1>
-    <p>Each card is one eval. Each row is one chat session and each column shows that eval's result for it. Press a result to see what was checked, or <b>Run</b> to run that eval on that session.</p>
+    <p>Each card is one eval. Each row is one chat session and each column shows that eval's result for it. Press a result to see what was checked, or <b>Run</b> to run that eval on that session. Sessions marked <b>Production</b> are the chats on the deployed app, read from Langfuse.</p>
   </header>
   <section class="evcards" id="evcards" aria-label="Evals"></section>
   <div class="evbar">
     <input id="search" class="search" type="search" placeholder="Search a session id or a title" aria-label="Search sessions" autocomplete="off" spellcheck="false">
     <span class="evcount" id="count"></span>
   </div>
+  <div class="filters" id="sources" role="group" aria-label="Where the sessions come from"></div>
+  <p class="prodnote" id="prodnote" aria-live="polite"></p>
   <div class="filters" id="filters" role="group" aria-label="Filter sessions"></div>
   <div class="tablewrap"><table class="evtable">
     <thead id="head"></thead>

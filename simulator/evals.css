@@ -18,6 +18,10 @@ button.evcard{cursor:pointer}
 .evbar .search{margin:0}
 .evcount{font:12px var(--mono);color:var(--muted)}
 .evbar+.filters{margin-top:12px}
+.prodnote{margin:0 0 12px;font:12px var(--mono);color:var(--muted)}
+.prodnote.bad{color:var(--warn)}
+.prodnote .linkbtn{padding:0;font:inherit;text-decoration:underline}
+.srcbadge{margin-left:8px;vertical-align:middle;font-size:9.5px;color:#fff;background:var(--brand-deep)}
 
 .evtable{min-width:0;width:100%}
 .evtable th.stick,.evtable td.stick{position:sticky;left:0;z-index:2;background:var(--card);min-width:420px;max-width:460px;box-shadow:1px 0 0 var(--line)}
